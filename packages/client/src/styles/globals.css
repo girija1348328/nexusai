@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: #ffffff;
+    --color-foreground: #18181b;
+    --color-card: #fafafa;
+    --color-card-hover: #f4f4f5;
+    --color-muted: #e4e4e7;
+    --color-muted-foreground: #71717a;
+    --color-border: #e4e4e7;
+    --color-accent: #18181b;
+    --color-accent-foreground: #fafafa;
+    --color-ring: #d4d4d8;
+  }
+
+  .dark {
+    --color-background: #09090b;
+    --color-foreground: #fafafa;
+    --color-card: #18181b;
+    --color-card-hover: #1f1f23;
+    --color-muted: #27272a;
+    --color-muted-foreground: #a1a1aa;
+    --color-border: #27272a;
+    --color-accent: #a1a1aa;
+    --color-accent-foreground: #fafafa;
+    --color-ring: #3f3f46;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  ::selection {
+    @apply bg-zinc-400/30 text-foreground;
+  }
+}
+
+@layer components {
+  .tiptap {
+    @apply outline-none;
+  }
+  .tiptap h1 {
+    @apply text-2xl font-bold mt-8 mb-4;
+  }
+  .tiptap h2 {
+    @apply text-xl font-semibold mt-6 mb-3;
+  }
+  .tiptap h3 {
+    @apply text-lg font-semibold mt-4 mb-2;
+  }
+  .tiptap p {
+    @apply mb-4 leading-relaxed text-muted-foreground;
+  }
+  .tiptap ul {
+    @apply list-disc pl-6 mb-4 space-y-1 text-muted-foreground;
+  }
+  .tiptap ol {
+    @apply list-decimal pl-6 mb-4 space-y-1 text-muted-foreground;
+  }
+  .tiptap code {
+    @apply bg-muted text-foreground px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+  .tiptap pre {
+    @apply bg-muted text-foreground p-4 rounded-lg mb-4 overflow-x-auto;
+  }
+  .tiptap pre code {
+    @apply bg-transparent p-0;
+  }
+  .tiptap blockquote {
+    @apply border-l-2 border-muted-foreground/30 pl-4 italic text-muted-foreground mb-4;
+  }
+  .tiptap a {
+    @apply text-foreground underline underline-offset-2 hover:text-muted-foreground;
+  }
+}

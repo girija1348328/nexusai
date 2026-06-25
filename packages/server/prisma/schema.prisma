@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  name      String
+  avatar    String?
+  role      String    @default("ADMIN")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  articles  Article[]
+}
+
+model Article {
+  id              String       @id @default(uuid())
+  title           String
+  slug            String       @unique
+  content         String
+  excerpt         String?
+  aiSummary       String?
+  aiKeyTakeaways  String?
+  aiTags          String?
+  seoTitle        String?
+  seoDescription  String?
+  coverImage      String?
+  status          String       @default("DRAFT")
+  publishedAt     DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  authorId        String
+  author          User         @relation(fields: [authorId], references: [id])
+  categoryId      String?
+  category        Category?    @relation(fields: [categoryId], references: [id])
+  tags            ArticleTag[]
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  articles    Article[]
+}
+
+model Tag {
+  id        String       @id @default(uuid())
+  name      String       @unique
+  slug      String       @unique
+  createdAt DateTime     @default(now())
+  articles  ArticleTag[]
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+}
