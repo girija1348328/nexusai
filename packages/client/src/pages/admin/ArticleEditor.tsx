@@ -39,7 +39,9 @@ function RichEditor({ value, onChange }: { value: string; onChange: (html: strin
             onMouseDown={(e) => {
               e.preventDefault();
               handleFormat(cmd, val);
-              setTimeout(() => onChange(editorRef.innerHTML), 0);
+              setTimeout(() => {
+                if (editorRef) onChange(editorRef.innerHTML);
+              }, 0);
             }}
             className="rounded px-2 py-0.5 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
           >
