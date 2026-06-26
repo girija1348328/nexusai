@@ -11,7 +11,7 @@ import tagRoutes from "./routes/tags.routes";
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: process.env.NODE_ENV === "production" ? false : "*" }));
+app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json({ limit: "10mb" }));
 
 app.use("/api/auth", authRoutes);
